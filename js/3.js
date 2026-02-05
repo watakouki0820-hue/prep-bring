@@ -282,31 +282,39 @@ async function setupDailyNotifications() {
   const registration = await navigator.serviceWorker.ready;
   const now = new Date();
   
-  // ★ テスト用：今この瞬間の「1分後」を計算
-  const targetDate = new Date(now.getTime() + 60 * 1000); 
+  // ★ 朝7:00の時間を設定
+  let targetDate = new Date();
+  targetDate.setHours(7, 0, 0, 0); // 7時0分0秒にセット
+
+  // もし、今この関数を実行したのが「すでに朝7時を過ぎた後」なら、
+  // そのままでは「過去」の通知になってしまうので、翌日の朝7時に修正する
+  if (targetDate <= now) {
+    targetDate.setDate(targetDate.getDate() + 1);
+  }
 
   const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
   const dayKey = days[targetDate.getDay()];
-  const summary = getDaySummary(dayKey) || "テストデータ: 持ち物を確認してください";
+  const summary = getDaySummary(dayKey) || "今日の持ち物を確認しましょう！";
 
   // 既存の同じタグの通知を一度消す
   const notifications = await registration.getNotifications();
   notifications.forEach(n => {
-    if(n.tag === 'test-trigger') n.close();
+    if(n.tag === 'daily-morning') n.close();
   });
 
   // 通知を予約
-  await registration.showNotification(`【自動予約】1分後テスト`, {
+  await registration.showNotification(`おはようございます！`, {
     body: summary,
-    tag: 'test-trigger',
+    tag: 'daily-morning',
     showTrigger: new TimestampTrigger(targetDate.getTime()),
+    icon: 'img/icon.png', // もしアイコンがあれば
+    badge: 'img/badge.png',
     renotify: true,
     silent: false,
     requireInteraction: true
   });
 
-  // 予約時間をアラートで出して、カウントダウンしやすくする
-  alert(targetDate.toLocaleTimeString() + " に予約しました。即座にブラウザを閉じてください！");
+  alert(targetDate.toLocaleString() + " に明日の時間割を予約しました。");
 }
 
 // --- 2. 特定の日の全教科・持ち物をまとめる関数 ---
@@ -329,4 +337,5 @@ function onScheduleChange() {
 }
 
 // ページ読み込み時にも実行
+
 window.addEventListener('load', setupDailyNotifications);
