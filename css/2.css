@@ -207,12 +207,18 @@ canvas {
   width: 100%;
 }
 
+.canvas-relative-container {
+  position: relative; /* これにより、中の absolute ボタンが Canvas を基準に動く */
+  display: inline-block; /* Canvasのサイズに合わせる */
+}
+
 /* 全体共通：縦に並べて中央に寄せる */
 .canvas-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center; /* 中央揃え */
   width: 100%;
+  margin: 0 auto;
 }
 
 /* スマホ（幅600px以下） */
@@ -270,3 +276,4 @@ canvas {
   text-align: left;
   color: #555;
 }
+
