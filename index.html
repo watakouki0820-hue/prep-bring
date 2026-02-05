@@ -10,6 +10,13 @@
 <body>
     <div class="canvas-wrapper">
         <canvas id="myCanvas" width="800" height="6000" style="background-color: #7a4c1e;"></canvas>
+        <div class="copy-section">
+            <p class="help-text">通知が届かない場合はコピーして設定へ</p>
+            <div class="copy-bar">
+              <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="flagUrl" readonly>
+              <button onclick="copyUrl()">コピー</button>
+            </div>
+        </div>
     </div>
     <div id="B">
         <button id="B1">月</button>
@@ -29,6 +36,7 @@
 </body>
 
 </html>
+
 
 
 
