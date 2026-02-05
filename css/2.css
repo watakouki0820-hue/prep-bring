@@ -30,7 +30,7 @@ canvas {
 #B1, #B2, #B3, #B4, #B5, #close, #daido, #pc {
   position: absolute;
   left: 50%; /* 親（Canvas）の真ん中を基準にする */
-  transform: translateX(-100%); /* 自身の幅の半分だけ左に戻して中央揃え */
+  transform: translateX(-200%); /* 自身の幅の半分だけ左に戻して中央揃え */
   cursor: pointer;
   transition: 0.3s;
   box-sizing: border-box;
@@ -129,5 +129,6 @@ canvas {
   border: none;
   cursor: pointer;
 }
+
 
 
