@@ -1,51 +1,67 @@
-/* 1. レイアウトの土台：余計な高さを消して一番上から表示 */
+/* =========================================
+   2.css - 完全修正版
+   (スマホズレ防止・配置修正済み)
+   ========================================= */
+
+/* 1. 全体の土台設定 */
 html, body {
   margin: 0;
   padding: 0;
-  height: auto;      /* 2000pxなどの固定を解除 */
-  background-color: #7a4c1e; /* キャンバスの背景色 */
+  height: auto;               /* 固定高さを廃止 */
+  background-color: #7a4c1e;  /* 背景色（隙間対策） */
+  font-family: sans-serif;    /* フォントを整える */
 }
 
-/* 2. キャンバス：画面中央、一番上に配置 */
+/* 2. キャンバスを置くエリア */
 .canvas-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: center; /* 左右中央 */
+  align-items: flex-start; /* 上揃え */
   width: 100%;
+  margin-top: 0;           /* 画面一番上から開始 */
 }
 
+/* キャンバス本体の設定 */
 canvas {
   border: 2px solid black;
   display: block;
+  /* 重要：スマホでも勝手に伸び縮みさせない */
+  width: 300px;
+  height: auto;
 }
 
-/* 3. ボタンとコピー欄の基準点（Canvasと同じ場所に重ねる） */
+/* 3. ボタンとコピー欄を入れる透明な箱 */
+/* これをキャンバスの真上にピタッと重ねます */
 #B {
-  position: absolute; /* Canvasの上に重ねるために absolute に変更 */
+  position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 800px; 
-  pointer-events: none; /* 下のCanvasを操作できるようにする */
+  transform: translateX(-50%); /* 画面中央に固定 */
+  
+  /* 重要：キャンバスと同じ幅にする（これでズレない） */
+  width: 300px; 
+  height: 100%;     /* 高さは中身に合わせる */
+  
+  pointer-events: none; /* 透明な箱自体はクリックの邪魔をしない */
 }
 
-/* ボタンのクリックを有効にする */
+/* #Bの中にあるボタン類はクリックできるように戻す */
 #B button, #B input, .copy-section {
   pointer-events: auto;
 }
 
-/* 4. 各ボタンの共通設定 */
+/* 4. 各ボタンの共通デザイン */
 #B1, #B2, #B3, #B4, #B5, #close, #daido, #pc {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* 中央揃え */
   cursor: pointer;
   transition: 0.3s;
   box-sizing: border-box;
+  white-space: nowrap; /* 文字の折り返し防止 */
 }
 
-/* --- 配置の高さ(top)設定 --- */
+/* 月〜金のボタン */
 #B1, #B2, #B3, #B4, #B5 { 
   top: 250px; 
   background-color: white;
@@ -54,6 +70,7 @@ canvas {
   font-size: 18px;
 }
 
+/* 閉じるボタン */
 #close {
   top: 305px;
   background-color: white;
@@ -62,13 +79,18 @@ canvas {
   font-size: 18px;
 }
 
-/* URLコピー欄：close(305px) と daido(860px) の中間に配置 */
+/* -------------------------------------------
+   5. URLコピー欄（閉じるボタンと大同ボタンの間）
+   ------------------------------------------- */
 .copy-section {
   position: absolute;
-  top: 550px; /* 指定通りの中間位置 */
+  top: 550px; /* ここで高さを調整（305pxと860pxの間） */
   left: 50%;
   transform: translateX(-50%);
+  
+  width: 280px; /* キャンバス(300px)より少し小さく */
   z-index: 999;
+  
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #000;
   border-radius: 8px;
@@ -76,6 +98,30 @@ canvas {
   box-sizing: border-box;
 }
 
+/* コピー欄の中身 */
+.copy-bar {
+  display: flex;
+  gap: 4px;
+}
+.copy-bar input {
+  flex: 1;
+  font-size: 11px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.copy-bar button {
+  padding: 6px 12px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* -------------------------------------------
+   6. 下部のリンクボタン
+   ------------------------------------------- */
 #daido {
   top: 860px;
   background-color: #3498db;
@@ -97,36 +143,47 @@ canvas {
   font-size: 18px;
 }
 
-/* 5. レスポンシブ設定 */
-@media (max-width: 600px) {
-  canvas { width: 100vw; height: auto; }
-  .copy-section { width: 90vw; }
-}
-
-@media (min-width: 601px) {
-  canvas { width: 300px; height: auto; }
-  .copy-section { width: 280px; }
-}
-
-/* コピー欄の中身 */
-.copy-bar {
-  display: flex;
-  gap: 4px;
-}
-.copy-bar input {
-  flex: 1;
-  font-size: 11px;
-  padding: 6px;
-}
-.copy-bar button {
-  padding: 6px 12px;
-  background: #333;
-  color: white;
-  border: none;
-}
-
-/* ホバー設定 */
+/* ホバー（マウスを乗せた時）の動き */
 #B1:hover, #B2:hover, #B3:hover, #B4:hover, #B5:hover, #close:hover {
   background-color: black;
   color: white;
+}
+#daido:hover {
+  background-color: #2980b9;
+  transform: translateX(-50%) translateY(-2px); /* 中央揃えを維持しつつ浮かす */
+}
+#pc:hover {
+  background-color: #00ff00;
+  color: black;
+}
+
+/* -------------------------------------------
+   7. レスポンシブ設定（重要！）
+   スマホでもPCでも常に幅300pxで固定することでズレを防ぐ
+   ------------------------------------------- */
+
+@media (max-width: 600px) {
+  canvas {
+    width: 300px; /* ここが重要！100vwにするとズレます */
+    height: auto;
+  }
+  #B {
+    width: 300px; /* ボタンの枠も合わせる */
+  }
+  .copy-section {
+    width: 280px;
+  }
+}
+
+@media (min-width: 601px) {
+  canvas {
+    width: 300px;
+    height: auto;
+  }
+  #B {
+    width: 300px;
+  }
+  .copy-section {
+    width: 280px;
+  }
 }
