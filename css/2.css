@@ -211,7 +211,7 @@ canvas {
   padding: 10px;
   background: #f4f4f4;
   border: 1px solid #ccc;
-  top: 750px;
+  top: 550px;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -234,6 +234,7 @@ canvas {
   border: none;
   cursor: pointer;
 }
+
 
 
 
