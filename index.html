@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/2.css">
 </head>
 <body>
-    <div class="canvas-wrapper">
+    <!-- <div class="canvas-wrapper">
         <canvas id="myCanvas" width="800" height="6000" style="background-color: #7a4c1e;"></canvas>
     </div>
     <div id="B">
@@ -27,12 +27,34 @@
               <button onclick="copyUrl()">コピー</button>
             </div>
         </div>
+    </div> -->
+    <div class="canvas-wrapper">
+  <div class="canvas-relative-container">
+    <canvas id="mainCanvas"></canvas>
+    <button id="B1">月</button>
+    <button id="B2">火</button>
+    <button id="B3">水</button>
+    <button id="B4">木</button>
+    <button id="B5">金</button>
+    <button id="close">閉じる</button>
+    <input id="daido" value="大同高校ホームページへ" onClick="document.location='https://www.daido-h.ed.jp/';">
+    <input id="pc" value="プログラミング部サイトへ" onClick="document.location='https://daido-h-ict.com/';">
+  </div>
+
+  <div class="copy-section">
+    <p class="help-text">通知が届かない場合はコピーして設定へ</p>
+    <div class="copy-bar">
+      <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="flagUrl" readonly>
+      <button onclick="copyUrl()">コピー</button>
     </div>
+  </div>
+</div>
     <div id="schedule"></div>
     <script src="js/3.js"></script>
 </body>
 
 </html>
+
 
 
 
