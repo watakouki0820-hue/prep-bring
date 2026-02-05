@@ -1,17 +1,20 @@
 /* 全体のレイアウト設定 */
-html, body {
-  height: 100%;
+body {
+  height: 2000px; /* スクロールできるように長いページにする */
   margin: 0;
-  display: flex;
-  justify-content: center; /* 左右中央 */
+}
+
+html, body {
+  height: 100%;   /* 画面全体を使う */
+  margin: 0;      /* 余白をなくす */
 }
 
 .canvas-wrapper {
   display: flex;
-  flex-direction: column; /* 縦に並べる */
-  align-items: center;    /* 中央に寄せる */
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
-  margin-top: 20px;
+  height: 100%;
 }
 
 /* Canvasとボタンの基準になるコンテナ */
@@ -230,6 +233,7 @@ canvas {
   border: none;
   cursor: pointer;
 }
+
 
 
 
