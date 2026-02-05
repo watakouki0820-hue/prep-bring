@@ -189,46 +189,38 @@ canvas {
    レスポンシブ設定（サイズを連動させる）
 ------------------------------------------- */
 
-/* --- コピーエリアをキャンバス内に浮かせる設定 --- */
 .copy-section {
-  /* 絶対配置にしてキャンバスの上に重ねる */
+  /* 絶対配置で場所を自由に決める */
   position: absolute; 
-  top: 10px;           /* キャンバスの上端から10px下 */
+  
+  /* close(305px) と pc(910px) の間の数値に設定 */
+  top: 600px; 
+  
   left: 50%;
-  transform: translateX(-50%); /* 常に中央配置 */
+  transform: translateX(-50%); /* 中央寄せ */
   
   /* 重なり順を一番手前に */
   z-index: 999; 
   
   /* 見た目の調整 */
-  background: rgba(255, 255, 255, 0.9); /* 少し透ける白 */
+  background: rgba(255, 255, 255, 0.9); 
   border: 1px solid #000;
   border-radius: 5px;
   padding: 8px;
-  box-sizing: border-box; /* 枠線を含めて幅を計算 */
+  box-sizing: border-box; /* はみ出し防止 */
 }
 
-/* --- メディアクエリ（既存のものを微調整） --- */
+/* --- メディアクエリ（既存の幅設定を維持） --- */
 
-/* スマホ（幅600px以下） */
 @media (max-width: 600px) {
-  canvas {
-    width: 100vw;
-    height: auto;
-  }
   .copy-section {
-    width: 90vw; /* 画面幅より少し小さくして、キャンバス内に収める */
+    width: 90vw; /* スマホでは横幅いっぱい */
   }
 }
 
-/* PC（幅601px以上） */
 @media (min-width: 601px) {
-  canvas {
-    width: 300px; /* 300pxに固定 */
-    height: auto;
-  }
   .copy-section {
-    width: 280px; /* キャンバス(300px)より少し小さくして中に収める */
+    width: 280px; /* PCではキャンバスの300pxに合わせる */
   }
 }
 
@@ -257,3 +249,4 @@ canvas {
   display: flex;
   justify-content: center;
 }
+
