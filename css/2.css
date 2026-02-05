@@ -209,8 +209,8 @@ canvas {
 
 /* コピーエリアをCanvasの幅に合わせる */
 .copy-section {
-  width: 90%;       /* Canvasのwidthと同じにする */
-  max-width: 500px; /* Canvasのmax-widthと同じにする */
+  width: 300px;       /* Canvasのwidthと同じにする */
+  max-width: 300px; /* Canvasのmax-widthと同じにする */
   margin-top: 15px;
   background: #f9f9f9;
   border: 1px solid #ddd;
@@ -249,3 +249,4 @@ canvas {
   margin-bottom: 8px;
   text-align: left;
 }
+
