@@ -49,6 +49,16 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.error('SW Registration Failed', err));
 }
 
+function copyUrl() {
+  const urlInput = document.getElementById("flagUrl");
+  urlInput.select();
+  urlInput.setSelectionRange(0, 99999); // スマホ用
+
+  navigator.clipboard.writeText(urlInput.value).then(() => {
+    alert("コピーしました！ブラウザの検索欄（URLバー）に貼り付けて開いてください。");
+  });
+}
+
 function drawSquare(scrollY) {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // 一度消す
 
@@ -349,4 +359,5 @@ function onScheduleChange() {
 // ページ読み込み時にも実行
 
 window.addEventListener('load', setupDailyNotifications);
+
 
