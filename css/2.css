@@ -207,11 +207,10 @@ canvas {
 
 /* コピーエリアの設定（Canvasのすぐ下に並ぶ） */
 .copy-section {
-  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 10px;
   background: #f4f4f4;
   border: 1px solid #ccc;
-  top: 550px;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -234,6 +233,7 @@ canvas {
   border: none;
   cursor: pointer;
 }
+
 
 
 
