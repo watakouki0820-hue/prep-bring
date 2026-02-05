@@ -274,11 +274,21 @@ itemInput.addEventListener("change", () => {
 
 // 3.js
 async function setupDailyNotifications() {
+  // 1. まず許可があるか確認し、なければ求める
+  if (Notification.permission !== 'granted') {
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') {
+      alert("通知を許可しないと、時間割の通知は届きません。");
+      return;
+    }
+  }
+
+  // 以降、元の処理 ...
   if (!('serviceWorker' in navigator) || !('showTrigger' in Notification.prototype)) {
     console.log("このブラウザは予約通知(Trigger)に未対応です。");
     return;
   }
-
+  
   const registration = await navigator.serviceWorker.ready;
   const now = new Date();
   
@@ -339,3 +349,4 @@ function onScheduleChange() {
 // ページ読み込み時にも実行
 
 window.addEventListener('load', setupDailyNotifications);
+
