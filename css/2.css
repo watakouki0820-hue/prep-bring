@@ -84,7 +84,7 @@ canvas {
    ------------------------------------------- */
 .copy-section {
   position: absolute;
-  top: 550px; /* ここで高さを調整（305pxと860pxの間） */
+  top: 700px; /* ここで高さを調整（305pxと860pxの間） */
   left: 50%;
   transform: translateX(-50%);
   
@@ -187,3 +187,4 @@ canvas {
     width: 280px;
   }
 }
+
