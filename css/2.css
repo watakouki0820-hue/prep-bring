@@ -1,257 +1,132 @@
-/* 全体のレイアウト設定 */
-body {
-  height: 2000px; /* スクロールできるように長いページにする */
-  margin: 0;
-}
-
-/* 1. レイアウトの土台をリセット */
+/* 1. レイアウトの土台：余計な高さを消して一番上から表示 */
 html, body {
   margin: 0;
   padding: 0;
-  height: auto;       /* 固定高さを解除 */
-  display: block;      /* 強制的な中央寄せを解除 */
-  background-color: #7a4c1e; /* キャンバスの色に合わせると隙間が目立ちません */
+  height: auto;      /* 2000pxなどの固定を解除 */
+  background-color: #7a4c1e; /* キャンバスの背景色 */
 }
 
-/* 2. キャンバスの表示位置 */
+/* 2. キャンバス：画面中央、一番上に配置 */
 .canvas-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  margin-top: 0;      /* 一番上に配置 */
-}
-
-/* Canvasとボタンの基準になるコンテナ */
-.canvas-relative-container {
-  position: relative;
-  display: inline-block;
 }
 
 canvas {
   border: 2px solid black;
-  background: transparent;
   display: block;
 }
 
+/* 3. ボタンとコピー欄の基準点（Canvasと同じ場所に重ねる） */
 #B {
-  position: relative; /* 子要素の absolute 配置の基準 */
+  position: absolute; /* Canvasの上に重ねるために absolute に変更 */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  max-width: 800px;   /* キャンバスの元サイズに合わせる */
-  margin: 0 auto;
-  min-height: 1000px; /* 下の要素が重ならないよう高さを確保 */
+  max-width: 800px; 
+  pointer-events: none; /* 下のCanvasを操作できるようにする */
 }
 
-#B1 {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 250px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
+/* ボタンのクリックを有効にする */
+#B button, #B input, .copy-section {
+  pointer-events: auto;
+}
+
+/* 4. 各ボタンの共通設定 */
+#B1, #B2, #B3, #B4, #B5, #close, #daido, #pc {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
-#B1:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
-}
-
-#B2 {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 250px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
-  transition: 0.3s;
-}
-
-#B2:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
-}
-
-#B3 {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 250px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
-  transition: 0.3s;
-}
-
-#B3:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
-}
-
-#B4 {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 250px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
-  transition: 0.3s;
-}
-
-#B4:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
-}
-
-#B5 {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 250px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
-  transition: 0.3s;
-}
-
-#B5:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
+/* --- 配置の高さ(top)設定 --- */
+#B1, #B2, #B3, #B4, #B5 { 
+  top: 250px; 
+  background-color: white;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 18px;
 }
 
 #close {
-  background-color: transparent; /* 背景なし */
-  border: 2px solid black;       /* 黒い枠線 */
-  color: black;                  /* 文字色 */
-  background-color: rgb(255, 255, 255);
-  padding: 10px 20px;            /* 内側余白 */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 305px;           /* 上から50px */
-  cursor: pointer;               /* マウスカーソルをポインタに */
-  display: block;
-  transition: 0.3s;
+  top: 305px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 18px;
 }
 
-#close:hover {
-  background-color: black; /* ホバー時に黒塗り */
-  color: white;            /* 文字を白に */
+/* URLコピー欄：close(305px) と daido(860px) の中間に配置 */
+.copy-section {
+  position: absolute;
+  top: 550px; /* 指定通りの中間位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 #daido {
-  display: inline-block;       /* リンクをブロック要素のように扱う */
-  padding: 12px 24px;          /* ボタンの大きさ（上下、左右） */
-  background-color: #3498db;   /* ボタンの色（青系） */
-  color: #fff;                 /* 文字の色（白） */
-  text-decoration: none;       /* 下線を消す */
-  border-radius: 6px;          /* 角を少し丸くする */
-  font-weight: bold;           /* 文字を太くする */
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 860px;           /* 上から50px */
-  transition: 0.3s;            /* アニメーションの速度 */
-  cursor: pointer;
-}
-
-/* マウスを乗せた時の動き */
-#daido:hover {
-  background-color: #2980b9;   /* 色を少し濃くする */
-  transform: translateY(-2px); /* 少し上に浮き上がる */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 影をつける */
+  top: 860px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 #pc {
-  display: inline-block;
-  padding: 10px 20px;
+  top: 910px;
   background-color: transparent;
   color: #00ff00;
   border: 2px solid #00ff00;
-  text-decoration: none;
+  padding: 10px 20px;
   font-weight: bold;
-  font-size: 18px;               /* 文字サイズ */
-  position: absolute;  /* 絶対配置 */
-  top: 910px;           /* 上から50px */
-  transition: 0.3s;
+  font-size: 18px;
 }
 
-#pc:hover {
-  background-color: #00ff00;
-  color: #000;
-  box-shadow: 0 0 15px #00ff00; /* 緑色に発光させる */
-}
-
-/* -------------------------------------------
-   レスポンシブ設定（サイズを連動させる）
-------------------------------------------- */
-
-.copy-section {
-  /* 絶対配置で場所を自由に決める */
-  position: absolute; 
-  
-  /* close(305px) と pc(910px) の間の数値に設定 */
-  top: 600px; 
-  
-  left: 50%;
-  transform: translateX(-50%); /* 中央寄せ */
-  
-  /* 重なり順を一番手前に */
-  z-index: 999; 
-  
-  /* 見た目の調整 */
-  background: rgba(255, 255, 255, 0.9); 
-  border: 1px solid #000;
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box; /* はみ出し防止 */
-}
-
-/* --- メディアクエリ（既存の幅設定を維持） --- */
-
+/* 5. レスポンシブ設定 */
 @media (max-width: 600px) {
-  .copy-section {
-    width: 90vw; /* スマホでは横幅いっぱい */
-  }
+  canvas { width: 100vw; height: auto; }
+  .copy-section { width: 90vw; }
 }
 
 @media (min-width: 601px) {
-  .copy-section {
-    width: 280px; /* PCではキャンバスの300pxに合わせる */
-  }
+  canvas { width: 300px; height: auto; }
+  .copy-section { width: 280px; }
 }
 
+/* コピー欄の中身 */
 .copy-bar {
   display: flex;
   gap: 4px;
 }
-
 .copy-bar input {
   flex: 1;
   font-size: 11px;
   padding: 6px;
 }
-
 .copy-bar button {
   padding: 6px 12px;
   background: #333;
   color: white;
   border: none;
-  cursor: pointer;
+}
+
+/* ホバー設定 */
+#B1:hover, #B2:hover, #B3:hover, #B4:hover, #B5:hover, #close:hover {
+  background-color: black;
+  color: white;
 }
