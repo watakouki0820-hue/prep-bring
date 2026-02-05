@@ -207,46 +207,66 @@ canvas {
   width: 100%;
 }
 
-/* コピーエリアをCanvasの幅に合わせる */
-.copy-section {
-  width: 300px;       /* Canvasのwidthと同じにする */
-  max-width: 300px; /* Canvasのmax-widthと同じにする */
-  margin-top: 15px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-sizing: border-box; /* パディングを含めて幅を計算 */
+/* 全体共通：縦に並べて中央に寄せる */
+.canvas-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中央揃え */
+  width: 100%;
 }
 
-/* 入力欄とボタンを横並びに */
+/* スマホ（幅600px以下） */
+@media (max-width: 600px) {
+  canvas, .copy-section {
+    width: 100%;   /* 両方とも横幅いっぱい */
+    height: auto;
+  }
+}
+
+/* PC（幅601px以上） */
+@media (min-width: 601px) {
+  canvas, .copy-section {
+    width: 300px;  /* 両方とも300pxで固定 */
+    height: auto;
+  }
+}
+
+/* コピーエリアの細かい見た目 */
+.copy-section {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box; /* パディングを含めて幅を計算（はみ出し防止） */
+}
+
 .copy-bar {
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 
 .copy-bar input {
-  flex-grow: 1; /* 入力欄をできるだけ広げる */
-  padding: 8px;
-  border: 1px solid #ccc;
+  flex: 1;          /* 入力欄を最大まで広げる */
+  font-size: 11px;
+  padding: 6px;
+  border: 1px solid #bbb;
   border-radius: 4px;
-  font-size: 12px;
 }
 
 .copy-bar button {
-  padding: 8px 15px;
-  background-color: #007bff;
+  padding: 6px 12px;
+  background: #333;
   color: white;
   border: none;
   border-radius: 4px;
+  font-size: 12px;
   cursor: pointer;
-  white-space: nowrap; /* ボタン内で改行させない */
 }
 
 .help-text {
-  font-size: 11px;
-  color: #666;
-  margin-bottom: 8px;
+  font-size: 10px;
+  margin: 0 0 6px 0;
   text-align: left;
+  color: #555;
 }
-
