@@ -84,7 +84,7 @@ canvas {
    ------------------------------------------- */
 .copy-section {
   position: absolute;
-  top: 700px; /* ここで高さを調整（305pxと860pxの間） */
+  top: 800px; /* ここで高さを調整（305pxと860pxの間） */
   left: 50%;
   transform: translateX(-50%);
   
@@ -123,7 +123,7 @@ canvas {
    6. 下部のリンクボタン
    ------------------------------------------- */
 #daido {
-  top: 860px;
+  top: 960px;
   background-color: #3498db;
   color: #fff;
   border: none;
@@ -134,7 +134,7 @@ canvas {
 }
 
 #pc {
-  top: 910px;
+  top: 1010px;
   background-color: transparent;
   color: #00ff00;
   border: 2px solid #00ff00;
@@ -187,4 +187,5 @@ canvas {
     width: 280px;
   }
 }
+
 
