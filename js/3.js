@@ -17,7 +17,7 @@ const screenWidth = window.innerWidth;
 canvas.width = (screenWidth < 600) ? screenWidth : 400;
 
 // 高さは固定（例: 500px）
-canvas.height = 1000;
+canvas.height = 1200;
 
 // 表示サイズも一致させる
 canvas.style.width  = canvas.width + "px";
@@ -359,5 +359,6 @@ function onScheduleChange() {
 // ページ読み込み時にも実行
 
 window.addEventListener('load', setupDailyNotifications);
+
 
 
